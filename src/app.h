@@ -2,17 +2,15 @@
 #ifndef __CHAR_APP_H__
 #define __CHAR_APP_H__
 
-#include <vector>
 #include "../config.h"
-#include "player.h"
-#include "i_camera.h"
+#include "scene.h"
 
 namespace game {
     CHAR_GAME class App
     {
         private:
-            std::vector<GameObject *> objects;
-         
+            Scene *currentScene;
+
         public:
             App(void);
             ~App(void);
@@ -21,8 +19,6 @@ namespace game {
 
         private:
             void initialize(void);
-            void draw(void);
-            void update(void);
     };
 }
 
