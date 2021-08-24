@@ -7,7 +7,8 @@ game::Level1::Level1(int32_t id)
 {
     this->id = id;
 
-    this->gameObjects.push_back(new Player());
+    Vector3 playerPosition = {0.0f, 1.8f, 0.0f};
+    this->gameObjects.push_back(new Player(playerPosition));
 
     // Ground Initilize.
     Transform transform = {0};
@@ -15,6 +16,13 @@ game::Level1::Level1(int32_t id)
     transform.rotation = (Vector3){0};
     transform.size = (Vector3){10.0f, 0.5f, 10.0f};
     this->gameObjects.push_back(new StaticMesh(transform, GREEN));
+
+    // Static Box.
+    Transform tBox1 = {0};
+    tBox1.position = (Vector3){1.5f, 1.0f, 1.5f};
+    tBox1.rotation = (Vector3){0};
+    tBox1.size = (Vector3){1.0f, 1.0f, 1.0f};
+    this->gameObjects.push_back(new StaticMesh(tBox1, BLUE));
 
     #if defined(CHAR_GAME_DEBUG)
     TraceLog(LOG_INFO, "Level1 constructor");

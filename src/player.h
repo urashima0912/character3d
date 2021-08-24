@@ -15,6 +15,7 @@ namespace game
 
         public:
             Player(void);
+            Player(Vector3 position);
             ~Player(void);
 
             void update(void) override;
