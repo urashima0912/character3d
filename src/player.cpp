@@ -19,6 +19,7 @@ game::Player::Player(Vector3 position) : GameObject()
     transform.size = (Vector3) {1.0f, 2.0f, 1.0f};
     transform.position = position;
     transform.rotation = (Vector3){0};
+
     #if defined(CHAR_GAME_DEBUG)
     TraceLog(LOG_INFO, "Player contructor.");
     #endif

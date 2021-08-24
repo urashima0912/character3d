@@ -14,7 +14,7 @@ game::Level1::Level1(int32_t id)
     Transform transform = {0};
     transform.position = (Vector3){0};
     transform.rotation = (Vector3){0};
-    transform.size = (Vector3){10.0f, 0.5f, 10.0f};
+    transform.size = (Vector3){20.0f, 0.2f, 20.0f};
     this->gameObjects.push_back(new StaticMesh(transform, GREEN));
 
     // Static Box.
@@ -58,7 +58,10 @@ void game::Level1::update(void)
 void game::Level1::draw(void) 
 {
    BeginDrawing();
-    ClearBackground(RAYWHITE);
+    ClearBackground(BLACK);
+    #if defined(CHAR_GAME_DEBUG)
+        DrawFPS(10, 10);
+    #endif
 
     Player *player = dynamic_cast<Player*>(gameObjects[0]);
     BeginMode3D(player->getCamera());
@@ -67,7 +70,7 @@ void game::Level1::draw(void)
     for(it; it != gameObjects.end(); it++)
         (*it)->draw();
 
-    DrawGrid(20, 1.0f);
+    DrawGrid(NUMBER_SQUARE_GRID, 1.0f);
     EndMode3D();
 
     EndDrawing();

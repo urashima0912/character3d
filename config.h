@@ -13,4 +13,6 @@
 #define SCREEN_HEIGHT   640
 #define SCREEN_TITLE    "Character v1.0"
 
+#define NUMBER_SQUARE_GRID  50
+
 #endif //__CHAR_CONFIG_H__
