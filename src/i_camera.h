@@ -1,10 +1,10 @@
 #pragma once
 #include "includes/raylib.h"
 #include "includes/game_object.h"
-
+#include "../config.h"
 namespace game
 {
-    class ICamera : public GameObject
+    CHAR_GAME class ICamera : public GameObject
     {
         public:
             Camera3D camera;

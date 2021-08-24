@@ -1,11 +1,10 @@
 #include "app.h"
 #include "includes/raylib.h"
-
+#include "scenes/level1.h"
 #include "static_mesh.h"
 
-using namespace game;
 
-App::App()
+game::App::App()
 {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(
@@ -22,7 +21,7 @@ App::App()
     this->initialize();
 }
 
-App::~App()
+game::App::~App()
 {
     delete currentScene;
     currentScene = nullptr;
@@ -32,12 +31,12 @@ App::~App()
     #endif
 }
 
-void App::initialize()
+void game::App::initialize()
 {
-    currentScene = new Scene(1);
+    currentScene = new Level1(1);
 }
 
-void App::run(void)
+void game::App::run(void)
 {
     while(!WindowShouldClose())
     {

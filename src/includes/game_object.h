@@ -8,6 +8,7 @@ enum GameObjectType {
     Player = 0,
     StaticMesh,
     Camera3d,
+    Scene,
 };
 
 namespace game

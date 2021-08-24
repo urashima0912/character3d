@@ -1,11 +1,12 @@
-#include "scene.h"
-#include "../config.h"
-#include "static_mesh.h"
-#include "player.h"
+#include "level1.h"
+#include "../player.h"
+#include "../static_mesh.h"
 
-game::Scene::Scene(int id)
+
+game::Level1::Level1(int32_t id)
 {
-    // Player Initilize.
+    this->id = id;
+
     this->gameObjects.push_back(new Player());
 
     // Ground Initilize.
@@ -16,39 +17,39 @@ game::Scene::Scene(int id)
     this->gameObjects.push_back(new StaticMesh(transform, GREEN));
 
     #if defined(CHAR_GAME_DEBUG)
-    TraceLog(LOG_INFO, "Scene constructor");
+    TraceLog(LOG_INFO, "Level1 constructor");
     #endif
 }
 
-game::Scene::~Scene(void)
+game::Level1::~Level1(void)
 {
-    for (std::size_t i=0; i < gameObjects.size(); i++)
+   for (std::size_t i=0; i < gameObjects.size(); i++)
     {
         delete gameObjects[i];
         gameObjects[i] = nullptr;
     }
 
     #if defined(CHAR_GAME_DEBUG)
-    TraceLog(LOG_INFO, "Scene destructor");
+    TraceLog(LOG_INFO, "Level1 destructor");
     #endif
 }
 
-void game::Scene::run(void)
+void game::Level1::run(void)
 {
     this->update();
     this->draw();
 }
 
-void game::Scene::update(void)
+void game::Level1::update(void)
 {
     std::vector<GameObject *>::iterator it = gameObjects.begin();
     for (it; it != gameObjects.end(); it++)
         (*it)->update();
 }
 
-void game::Scene::draw(void)
+void game::Level1::draw(void) 
 {
-    BeginDrawing();
+   BeginDrawing();
     ClearBackground(RAYWHITE);
 
     Player *player = dynamic_cast<Player*>(gameObjects[0]);
@@ -62,4 +63,9 @@ void game::Scene::draw(void)
     EndMode3D();
 
     EndDrawing();
+}
+
+game::SceneType game::Level1::type(void) const
+{
+    return SceneType::Level_1;
 }

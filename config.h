@@ -2,6 +2,8 @@
 #ifndef __CHAR_CONFIG_H__
 #define __CHAR_CONFIG_H__
 
+#include <cinttypes>
+
 #define CHAR_GAME
 
 #define CHAR_GAME_DEBUG 1

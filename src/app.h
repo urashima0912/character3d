@@ -3,7 +3,7 @@
 #define __CHAR_APP_H__
 
 #include "../config.h"
-#include "scene.h"
+#include "includes/scene.h"
 
 namespace game {
     CHAR_GAME class App
