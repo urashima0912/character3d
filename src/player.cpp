@@ -1,4 +1,5 @@
 #include "player.h"
+#include "includes/rlgl.h"
 
 game::Player::Player(void) : GameObject()
 {
@@ -14,6 +15,7 @@ game::Player::Player(void) : GameObject()
 
 game::Player::Player(Vector3 position) : GameObject()
 {
+    // HideCursor();
     camera = new ICamera();
 
     transform.size = (Vector3) {1.0f, 2.0f, 1.0f};
@@ -37,40 +39,42 @@ game::Player::~Player(void)
 
 void game::Player::update(void)
 {
-    camera->update();
-
-    if (IsKeyDown(KEY_W)) 
-    {
-        transform.position.z -= 0.5;
-        camera->camera.position.z -= 0.5; 
-    }
-    else if (IsKeyDown(KEY_S))
-    {
-        transform.position.z += 0.5;
-        camera->camera.position.z += 0.5; 
-    }
-
-    camera->camera.target = transform.position;
+    movement();
 }
 
 void game::Player::draw(void) const
 {
     camera->draw(); //TODO: Implement GUI.
 
+    rlPushMatrix();
+    rlTranslatef(
+        transform.position.x,
+        transform.position.y,
+        transform.position.z
+    );
+    rlRotatef(transform.rotation.y, 0.0f, 1.0f, 0.0f);
     DrawCube(
-        transform.position,
+        {0},
         transform.size.x,
         transform.size.y,
         1.0f,
         RED
     );
     DrawCubeWires(
-        transform.position,
+        {0},
         transform.size.x,
         transform.size.y,
         1.0f,
         RAYWHITE
     );
+
+    DrawLine3D(
+        {0.0f, 0.5f, 0.0f},
+        {0.0f, 0.5f, 1.0f},
+        RAYWHITE
+    );
+
+    rlPopMatrix();
 }
 
 GameObjectType game::Player::type(void) const
@@ -81,4 +85,41 @@ GameObjectType game::Player::type(void) const
 Camera3D game::Player::getCamera(void) const
 {
     return camera->camera;
+}
+
+/****************************************************
+ *  Private methods
+*****************************************************/
+void game::Player::movement(void)
+{
+    camera->update();
+    
+    int32_t value = camera->mouseDirection();
+    if (value != 0)
+    {
+        transform.rotation.y += value * angleVelocity;
+        if (transform.rotation.y > 360.0f)
+            transform.rotation.y = 0.0f;
+        else if (transform.rotation.y < 0.0f)
+            transform.rotation.y = 360.0f;
+    }
+
+    if (IsKeyDown(KEY_W)) 
+    {
+        transform.position.z = transform.position.z + cosf(transform.rotation.y * DEG2RAD) * 0.5;
+        transform.position.x = transform.position.x + sinf(transform.rotation.y * DEG2RAD) * 0.5;
+        
+        // camera->camera.position.z = transform.position.z - 10.5;
+        // camera->camera.position.x = transform.position.x - 10.5; 
+    }
+    else if (IsKeyDown(KEY_S))
+    {
+        transform.position.z = transform.position.z - cosf(transform.rotation.y * DEG2RAD) * 0.5;
+        transform.position.x = transform.position.x - sinf(transform.rotation.y * DEG2RAD) * 0.5;
+        
+        // camera->camera.position.z = transform.position.z + 10.5;
+        // camera->camera.position.x = transform.position.x + 10.5; 
+    }
+
+    camera->camera.target = transform.position;
 }

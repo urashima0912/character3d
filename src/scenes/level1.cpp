@@ -7,6 +7,10 @@ game::Level1::Level1(int32_t id)
 {
     this->id = id;
 
+    HideCursor();
+    DisableCursor();
+
+
     Vector3 playerPosition = {0.0f, 1.8f, 0.0f};
     this->gameObjects.push_back(new Player(playerPosition));
 
@@ -70,7 +74,15 @@ void game::Level1::draw(void)
     for(it; it != gameObjects.end(); it++)
         (*it)->draw();
 
+    
+
     DrawGrid(NUMBER_SQUARE_GRID, 1.0f);
+
+    // Draw Axis
+    DrawLine3D({0}, {15.0f, 0.0f, 0.0f}, RED);
+    DrawLine3D({0}, {0.0f, 15.0f, 0.0f}, GREEN);
+    DrawLine3D({0}, {0.0f, 0.0f, 15.0f}, BLUE);
+
     EndMode3D();
 
     EndDrawing();
