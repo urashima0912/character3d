@@ -145,4 +145,5 @@ void game::Player::movement(void)
     }
     
     camera->camera.target = transform.position;
+    collisionShape->setTransform(transform);
 }

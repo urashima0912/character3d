@@ -25,6 +25,8 @@ namespace game
             virtual void update(void);
             virtual void draw(void) const;
             virtual GameObjectType type(void) const;
+
+            void setTransform(Transform transform);
         
         private:
             //TODO: I need to define all shape for colliders.

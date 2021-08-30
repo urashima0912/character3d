@@ -43,3 +43,8 @@ void game::CollisionShape::drawRectangleShape(void) const
     );
     rlPopMatrix();
 }
+
+void game::CollisionShape::setTransform(Transform transform)
+{
+    this->transform = transform;
+}
