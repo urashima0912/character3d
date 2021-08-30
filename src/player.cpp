@@ -1,5 +1,4 @@
 #include "player.h"
-#include "includes/rlgl.h"
 
 game::Player::Player(void) : GameObject()
 {
@@ -8,6 +7,13 @@ game::Player::Player(void) : GameObject()
     transform.size = (Vector3) {1.0f, 2.0f, 1.0f};
     transform.position = (Vector3){0.0f, transform.size.y / 2, 0.0f};
     transform.rotation = (Vector3){0};
+
+    // CollisionShape Object Initilize
+    collisionShape = new CollisionShape(
+        CollisionShapeType::Rectangle,
+        transform
+    );
+
     #if defined(CHAR_GAME_DEBUG)
     TraceLog(LOG_INFO, "Player contructor.");
     #endif
@@ -22,6 +28,12 @@ game::Player::Player(Vector3 position) : GameObject()
     transform.position = position;
     transform.rotation = (Vector3){0};
 
+    // CollisionShape Object Initilize
+    collisionShape = new CollisionShape(
+        CollisionShapeType::Rectangle,
+        transform
+    );
+
     #if defined(CHAR_GAME_DEBUG)
     TraceLog(LOG_INFO, "Player contructor.");
     #endif
@@ -29,8 +41,13 @@ game::Player::Player(Vector3 position) : GameObject()
 
 game::Player::~Player(void)
 {
+    //TODO: change this to unique pointers.
     delete camera;
     camera = nullptr;
+
+    delete collisionShape;
+    collisionShape = nullptr;
+
     // camera = nullptr;
     #if defined(CHAR_GAME_DEBUG)
     TraceLog(LOG_INFO, "Player destructor.");
@@ -75,6 +92,8 @@ void game::Player::draw(void) const
     );
 
     rlPopMatrix();
+
+    collisionShape->draw();
 }
 
 GameObjectType game::Player::type(void) const
@@ -94,15 +113,19 @@ void game::Player::movement(void)
 {
     camera->update();
     
-    int32_t value = camera->mouseDirection();
-    if (value != 0)
+    if (IsKeyDown(KEY_A))
     {
-        transform.rotation.y += value * angleVelocity;
-        if (transform.rotation.y > 360.0f)
+        transform.rotation.y += angleVelocity;
+        if(transform.rotation.y > 360.0f)
             transform.rotation.y = 0.0f;
-        else if (transform.rotation.y < 0.0f)
+    }
+    else if (IsKeyDown(KEY_D))
+    {
+        transform.rotation.y -= angleVelocity;
+        if(transform.rotation.y < 0.0f)
             transform.rotation.y = 360.0f;
     }
+
 
     if (IsKeyDown(KEY_W)) 
     {
@@ -120,6 +143,6 @@ void game::Player::movement(void)
         // camera->camera.position.z = transform.position.z + 10.5;
         // camera->camera.position.x = transform.position.x + 10.5; 
     }
-
+    
     camera->camera.target = transform.position;
 }

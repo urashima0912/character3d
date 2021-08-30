@@ -3,6 +3,7 @@
 #define __CHAR_CONFIG_H__
 
 #include <cinttypes>
+#include "src/includes/rlgl.h"
 
 #define CHAR_GAME
 

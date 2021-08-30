@@ -5,6 +5,7 @@
 #include "includes/raylib.h"
 #include "includes/game_object.h"
 #include "i_camera.h"
+#include "collision_shape.h"
 #include "../config.h"
 
 namespace game
@@ -12,7 +13,8 @@ namespace game
     CHAR_GAME class Player : public GameObject{
         private:
             ICamera *camera;
-            const float angleVelocity{5.5f};
+            const float angleVelocity{7.5f};
+            CollisionShape *collisionShape;
 
         public:
             Player(void);

@@ -1,4 +1,6 @@
 #pragma once
+#ifndef __CHAR_SCENE_H__
+#define __CHAR_SCENE_H__
 
 #include <vector>
 #include "game_object.h"
@@ -24,3 +26,5 @@ namespace game
             virtual void run(void) = 0;
     };
 }
+
+#endif //__CHAR_SCENE_H__

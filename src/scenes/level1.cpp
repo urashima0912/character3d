@@ -7,9 +7,8 @@ game::Level1::Level1(int32_t id)
 {
     this->id = id;
 
-    HideCursor();
-    DisableCursor();
-
+    // HideCursor();
+    // DisableCursor();
 
     Vector3 playerPosition = {0.0f, 1.8f, 0.0f};
     this->gameObjects.push_back(new Player(playerPosition));

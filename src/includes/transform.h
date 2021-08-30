@@ -9,9 +9,9 @@ namespace game
     class Transform
     {
         public:
-            Vector3 position;
-            Vector3 rotation;
-            Vector3 size;
+            Vector3 position{0};
+            Vector3 rotation{0};
+            Vector3 size{0};
     };
 }
 

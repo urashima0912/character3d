@@ -9,6 +9,7 @@ enum GameObjectType {
     StaticMesh,
     Camera3d,
     Scene,
+    Collider,
 };
 
 namespace game
