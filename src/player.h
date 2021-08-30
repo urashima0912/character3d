@@ -14,7 +14,7 @@ namespace game
         private:
             ICamera *camera;
             const float angleVelocity{7.5f};
-            CollisionShape *collisionShape;
+            std::unique_ptr<CollisionShape> collisionShape;
 
         public:
             Player(void);

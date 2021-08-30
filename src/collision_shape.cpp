@@ -4,11 +4,17 @@ game::CollisionShape::CollisionShape(CollisionShapeType shapeType, Transform tra
 {
     this->shapeType = shapeType;
     this->transform = transform;
+
+    #if defined(CHAR_GAME_DEBUG)
+    TraceLog(LOG_INFO, "CollisionShape contructor.");
+    #endif
 }
 
 game::CollisionShape::~CollisionShape(void)
 {
-    //TODO:
+    #if defined(CHAR_GAME_DEBUG)
+    TraceLog(LOG_INFO, "CollisionShape destructor.");
+    #endif
 }
 
 void game::CollisionShape::update(void)

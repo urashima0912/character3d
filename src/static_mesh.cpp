@@ -2,6 +2,11 @@
 
 game::StaticMesh::StaticMesh(Transform transform, Color color)
 {
+    collisionShape = std::make_unique<CollisionShape>(
+        CollisionShapeType::Rectangle,
+        transform
+    );
+
     this->transform = transform;
     this->color = color;   
     #if defined(CHAR_GAME_DEBUG)
@@ -37,6 +42,8 @@ void game::StaticMesh::draw(void) const
         transform.size.z,
         RAYWHITE
     );
+
+    collisionShape->draw();
 }
 
 GameObjectType game::StaticMesh::type(void) const

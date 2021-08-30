@@ -9,7 +9,7 @@ game::Player::Player(void) : GameObject()
     transform.rotation = (Vector3){0};
 
     // CollisionShape Object Initilize
-    collisionShape = new CollisionShape(
+    collisionShape = std::make_unique<CollisionShape>(
         CollisionShapeType::Rectangle,
         transform
     );
@@ -29,7 +29,7 @@ game::Player::Player(Vector3 position) : GameObject()
     transform.rotation = (Vector3){0};
 
     // CollisionShape Object Initilize
-    collisionShape = new CollisionShape(
+    collisionShape = std::make_unique<CollisionShape>(
         CollisionShapeType::Rectangle,
         transform
     );
@@ -44,9 +44,6 @@ game::Player::~Player(void)
     //TODO: change this to unique pointers.
     delete camera;
     camera = nullptr;
-
-    delete collisionShape;
-    collisionShape = nullptr;
 
     // camera = nullptr;
     #if defined(CHAR_GAME_DEBUG)

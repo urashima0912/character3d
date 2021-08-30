@@ -2,6 +2,7 @@
 
 #include "../config.h"
 #include "includes/game_object.h"
+#include "collision_shape.h"
 
 namespace game
 {
@@ -9,6 +10,7 @@ namespace game
     {   
         public:
             Color color;
+            std::unique_ptr<CollisionShape> collisionShape;
 
         public:
             StaticMesh(Transform transform, Color color);
