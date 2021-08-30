@@ -12,9 +12,10 @@ namespace game
 {
     CHAR_GAME class Player : public GameObject{
         private:
-            ICamera *camera;
-            const float angleVelocity{7.5f};
+            std::unique_ptr<ICamera> camera;
             std::unique_ptr<CollisionShape> collisionShape;
+            const float angleVelocity{7.5f};
+            const float speed{0.2};
 
         public:
             Player(void);

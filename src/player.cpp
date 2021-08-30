@@ -2,7 +2,7 @@
 
 game::Player::Player(void) : GameObject()
 {
-    camera = new ICamera();
+    camera = std::make_unique<ICamera>();
 
     transform.size = (Vector3) {1.0f, 2.0f, 1.0f};
     transform.position = (Vector3){0.0f, transform.size.y / 2, 0.0f};
@@ -22,7 +22,7 @@ game::Player::Player(void) : GameObject()
 game::Player::Player(Vector3 position) : GameObject()
 {
     // HideCursor();
-    camera = new ICamera();
+    camera = std::make_unique<ICamera>();
 
     transform.size = (Vector3) {1.0f, 2.0f, 1.0f};
     transform.position = position;
@@ -41,11 +41,6 @@ game::Player::Player(Vector3 position) : GameObject()
 
 game::Player::~Player(void)
 {
-    //TODO: change this to unique pointers.
-    delete camera;
-    camera = nullptr;
-
-    // camera = nullptr;
     #if defined(CHAR_GAME_DEBUG)
     TraceLog(LOG_INFO, "Player destructor.");
     #endif
@@ -126,16 +121,16 @@ void game::Player::movement(void)
 
     if (IsKeyDown(KEY_W)) 
     {
-        transform.position.z = transform.position.z + cosf(transform.rotation.y * DEG2RAD) * 0.5;
-        transform.position.x = transform.position.x + sinf(transform.rotation.y * DEG2RAD) * 0.5;
+        transform.position.z = transform.position.z + cosf(transform.rotation.y * DEG2RAD) * speed;
+        transform.position.x = transform.position.x + sinf(transform.rotation.y * DEG2RAD) * speed;
         
         // camera->camera.position.z = transform.position.z - 10.5;
         // camera->camera.position.x = transform.position.x - 10.5; 
     }
     else if (IsKeyDown(KEY_S))
     {
-        transform.position.z = transform.position.z - cosf(transform.rotation.y * DEG2RAD) * 0.5;
-        transform.position.x = transform.position.x - sinf(transform.rotation.y * DEG2RAD) * 0.5;
+        transform.position.z = transform.position.z - cosf(transform.rotation.y * DEG2RAD) * speed;
+        transform.position.x = transform.position.x - sinf(transform.rotation.y * DEG2RAD) * speed;
         
         // camera->camera.position.z = transform.position.z + 10.5;
         // camera->camera.position.x = transform.position.x + 10.5; 
