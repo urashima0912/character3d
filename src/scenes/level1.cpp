@@ -17,15 +17,19 @@ game::Level1::Level1(int32_t id)
     Transform transform = {0};
     transform.position = (Vector3){0};
     transform.rotation = (Vector3){0};
-    transform.size = (Vector3){20.0f, 0.2f, 20.0f};
-    this->gameObjects.push_back(new StaticMesh(transform, GREEN));
+    transform.size = (Vector3){30.0f, 0.1f, 30.0f};
+    Color groundColor = {100, 100, 0, 255};
+    this->gameObjects.push_back(new StaticMesh(transform, groundColor));
 
     // Static Box.
     Transform tBox1 = {0};
     tBox1.position = (Vector3){1.5f, 1.0f, 1.5f};
     tBox1.rotation = (Vector3){0};
     tBox1.size = (Vector3){1.0f, 1.0f, 1.0f};
-    this->gameObjects.push_back(new StaticMesh(tBox1, BLUE));
+    StaticMesh *box = new StaticMesh(tBox1, BLUE); //TODO: change this by a unique_ptr
+    box->setCollisionShapeEnabled(true);
+    box->setCollisionShapeTrigger(true);
+    this->gameObjects.push_back(box);
 
     #if defined(CHAR_GAME_DEBUG)
     TraceLog(LOG_INFO, "Level1 constructor");

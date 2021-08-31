@@ -26,6 +26,8 @@ namespace game
             GameObjectType type(void) const override;
             Camera3D getCamera(void) const;
         
+            bool checkCollision(Transform transform) const;
+
         private:
             void movement(void);
     };

@@ -15,9 +15,13 @@ namespace game
 
     CHAR_GAME class CollisionShape : public GameObject
     {
+        public:
+            bool isEnabled{false};
+            bool isTrigger{false};
+
         private:
             CollisionShapeType shapeType{CollisionShapeType::Empty};
-            Transform transform;
+            Transform transform{0};
 
         public:
             CollisionShape(CollisionShapeType shapeType, Transform transform);
@@ -27,7 +31,10 @@ namespace game
             virtual GameObjectType type(void) const;
 
             void setTransform(Transform transform);
-        
+
+            bool checkCollisionCube(const Transform& transform1, const Transform& transform2) const;
+
+
         private:
             //TODO: I need to define all shape for colliders.
             void drawRectangleShape(void) const;

@@ -54,3 +54,36 @@ void game::CollisionShape::setTransform(Transform transform)
 {
     this->transform = transform;
 }
+
+bool game::CollisionShape::checkCollisionCube(const Transform& transform1, const Transform& transform2) const
+{
+    if (!this->isEnabled) return false;
+
+    BoundingBox box1 = {
+        (Vector3){
+            transform1.position.x - transform1.size.x / 2,
+            transform1.position.y - transform1.size.y / 2,
+            transform1.position.z - transform1.size.z / 2
+        },
+        (Vector3){
+            transform1.position.x + transform1.size.x / 2,
+            transform1.position.y + transform1.size.y / 2,
+            transform1.position.z + transform1.size.z / 2
+        },
+    };
+
+    BoundingBox box2 = {
+        (Vector3){
+            transform2.position.x - transform2.size.x / 2,
+            transform2.position.y - transform2.size.y / 2,
+            transform2.position.z - transform2.size.z / 2
+        },
+        (Vector3){
+            transform2.position.x + transform2.size.x / 2,
+            transform2.position.y + transform2.size.y / 2,
+            transform2.position.z + transform2.size.z / 2
+        },
+    };
+
+    return CheckCollisionBoxes(box1, box2);
+}

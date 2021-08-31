@@ -67,7 +67,7 @@ void game::Player::draw(void) const
         transform.size.x,
         transform.size.y,
         1.0f,
-        RED
+        (Color){255, 0, 0, 150}
     );
     DrawCubeWires(
         {0},
@@ -96,6 +96,11 @@ GameObjectType game::Player::type(void) const
 Camera3D game::Player::getCamera(void) const
 {
     return camera->camera;
+}
+
+bool game::Player::checkCollision(Transform transform) const
+{
+    collisionShape->checkCollisionCube(this->transform, transform);
 }
 
 /****************************************************

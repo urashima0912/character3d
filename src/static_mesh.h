@@ -19,5 +19,8 @@ namespace game
             void update(void) override;
             void draw(void) const override;
             GameObjectType type(void) const override;
+
+            void setCollisionShapeEnabled(bool value);
+            void setCollisionShapeTrigger(bool value);
     };
 }

@@ -50,3 +50,13 @@ GameObjectType game::StaticMesh::type(void) const
 {
     return GameObjectType::StaticMesh;
 }
+
+void game::StaticMesh::setCollisionShapeEnabled(bool value)
+{
+    this->collisionShape->isEnabled = value;
+}
+
+void game::StaticMesh::setCollisionShapeTrigger(bool value)
+{
+    this->collisionShape->isTrigger = value;
+}
